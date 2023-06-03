@@ -4,7 +4,25 @@
 	import type { PageData } from "./$types";
 
 	export let data: PageData;
-	console.log(data);
+	$: tags = $page.url.searchParams.get("tags")?.split(",");
+	$: search = $page.url.searchParams.get("search")?.toLowerCase();
+	$: problems = data.problems
+		.filter((problem) => {
+			let pass = true;
+
+			if (tags) {
+				pass &&= tags.some((tag) => problem.tags.includes(tag));
+			}
+
+			if (search) {
+				pass &&=
+					problem.name.toLowerCase().includes(search) ||
+					problem.id.toLowerCase().includes(search);
+			}
+
+			return pass;
+		})
+		.sort((a, b) => a.id.localeCompare(b.id));
 </script>
 
 <svelte:head>
@@ -23,7 +41,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each data.problems as problem}
+			{#each problems as problem}
 				<a class="contents" href="/problem/{problem.id}">
 					<tr class="hover">
 						<td class="transition-all">{problem.id}</td>
