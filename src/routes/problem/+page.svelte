@@ -7,8 +7,9 @@
 </script>
 
 <svelte:head>
-	<title>{$t("nav.problem")}</title>
+	<title>{$t("nav.problem")} | WASM OJ Wonderland</title>
 	<meta name="description" content={$t("with-tech")} />
+	<meta property="og:image" content="/images/preview-0.jpg" />
 </svelte:head>
 
 <div class="overflow-x-auto px-4 py-24">

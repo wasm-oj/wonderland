@@ -14,6 +14,11 @@
 	});
 </script>
 
+<svelte:head>
+	<title>WASM OJ Wonderland</title>
+	<meta property="og:image" content="/images/preview-0.jpg" />
+</svelte:head>
+
 <div class="flex h-full w-full items-center justify-center">
 	{#if data.ok}
 		<h1 class="animate-pulse text-2xl">{$t("signing-in")}</h1>

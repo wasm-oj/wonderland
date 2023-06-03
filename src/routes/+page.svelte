@@ -18,7 +18,7 @@
 <svelte:head>
 	<title>{$t("welcome")}</title>
 	<meta name="description" content={$t("with-tech")} />
-	<meta property="og:image" content="/images/landscape-{night ? 1 : 0}.jpg" />
+	<meta property="og:image" content="/images/preview-{night ? 1 : 0}.jpg" />
 </svelte:head>
 
 <div class="flex h-full w-full items-center justify-center">

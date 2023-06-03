@@ -36,6 +36,12 @@
 		data.problem.policy.reduce((acc, cur) => acc + cur.score, 0);
 </script>
 
+<svelte:head>
+	<title>{$t("nav.submission")} {data.submission.id} | WASM OJ Wonderland</title>
+	<meta name="description" content={$t("with-tech")} />
+	<meta property="og:image" content="/images/preview-0.jpg" />
+</svelte:head>
+
 <div class="h-full w-full overflow-auto">
 	<div class="flex w-full items-center justify-center gap-4 px-4 max-lg:flex-col lg:items-start">
 		{#key data.submission.status}

@@ -27,6 +27,7 @@
 <svelte:head>
 	<title>Submit to {data.problem.name} | WASM OJ Wonderland</title>
 	<meta name="description" content={data.problem.description} />
+	<meta property="og:image" content="/images/preview-0.jpg" />
 </svelte:head>
 
 <div class="h-full w-full overflow-auto">
