@@ -1,0 +1,56 @@
+{
+	"auth": {
+		"invalid-token": "Invalid token, please retry again."
+	},
+	"compilers-and-runners": "There are {compilers} compilers and {runners} runners configured with this instance.",
+	"nav": {
+		"login": "Login",
+		"problem": "Problem",
+		"submission": "Submission"
+	},
+	"problem": {
+		"description": "Description",
+		"hint": "Hint",
+		"id": "ID",
+		"input": "Input",
+		"limits": "Limits",
+		"no-description": "There is no description.",
+		"no-hint": "There is no hint.",
+		"output": "Output",
+		"policies": "Policies",
+		"problem": "Problem",
+		"sample": "Sample",
+		"samples": "Samples",
+		"score": "Score",
+		"see-sample": "See Sample",
+		"tags": "Tags",
+		"testcases": "Testcases",
+		"total-score": "The total score of this problem is {total_score}."
+	},
+	"signing-in": "Signing In",
+	"submission": {
+		"cost": "Cost",
+		"details": "Details",
+		"id": "ID",
+		"lang": "Language",
+		"memory": "Memory",
+		"policy": "Policy",
+		"problem": "Problem",
+		"score": "Score",
+		"stats": "Stats",
+		"status": "Status",
+		"submitted-at": "Submitted at {time}",
+		"submitted-by": "Submitted by {submitter}",
+		"testcase": "Testcase",
+		"time": "Time"
+	},
+	"submit": {
+		"code": "Code",
+		"language": "Language",
+		"select-language": "Select Language",
+		"submit": "Submit",
+		"upload": "Upload"
+	},
+	"welcome": "Welcome to WOW",
+	"with-tech": "WASM OJ Wonderland."
+}

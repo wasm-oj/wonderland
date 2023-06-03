@@ -1,0 +1,56 @@
+{
+	"auth": {
+		"invalid-token": "登入無效，請重試"
+	},
+	"compilers-and-runners": "此實例配置了 {compilers} 個編譯伺服器和 {runners} 個運行伺服器。",
+	"nav": {
+		"login": "登入",
+		"problem": "題庫",
+		"submission": "提交"
+	},
+	"problem": {
+		"description": "說明",
+		"hint": "提示",
+		"id": "編號",
+		"input": "輸入",
+		"limits": "限制",
+		"no-description": "無說明",
+		"no-hint": "沒有提示。",
+		"output": "輸出",
+		"policies": "評分規則",
+		"problem": "題目",
+		"sample": "範例",
+		"samples": "範例",
+		"score": "分數",
+		"see-sample": "查看範例",
+		"tags": "標籤",
+		"testcases": "測試資料",
+		"total-score": "這題的總分是 {total_score} 分。"
+	},
+	"signing-in": "登入中",
+	"submission": {
+		"cost": "成本",
+		"details": "細節",
+		"id": "編號",
+		"lang": "語言",
+		"memory": "記憶體",
+		"policy": "規則",
+		"problem": "題目",
+		"score": "分數",
+		"stats": "數據",
+		"status": "狀態",
+		"submitted-at": "提交於 {time}",
+		"submitted-by": "由 {submitter} 提交",
+		"testcase": "測試",
+		"time": "時間"
+	},
+	"submit": {
+		"code": "程式碼",
+		"language": "語言",
+		"select-language": "選擇語言",
+		"submit": "提交",
+		"upload": "上傳"
+	},
+	"welcome": "歡迎使用 WOW",
+	"with-tech": "WASM OJ Wonderland."
+}
