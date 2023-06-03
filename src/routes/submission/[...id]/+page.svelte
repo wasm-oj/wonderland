@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
+	import { page } from "$app/stores";
 	import Code from "$lib/md/Code.svelte";
 	import { onMount } from "svelte";
 	import { t } from "svelte-i18n";
@@ -39,7 +40,7 @@
 <svelte:head>
 	<title>{$t("nav.submission")} {data.submission.id} | WASM OJ Wonderland</title>
 	<meta name="description" content={$t("with-tech")} />
-	<meta property="og:image" content="/images/preview-0.jpg" />
+	<meta property="og:image" content="{$page.url.origin}/images/preview-0.jpg" />
 </svelte:head>
 
 <div class="h-full w-full overflow-auto">

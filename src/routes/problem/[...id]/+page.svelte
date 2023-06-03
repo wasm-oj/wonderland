@@ -18,7 +18,7 @@
 		name="description"
 		content={data.problem.description.replace(/\n/g, " ").substring(0, 200)}
 	/>
-	<meta property="og:image" content="/images/preview-0.jpg" />
+	<meta property="og:image" content="{$page.url.origin}/images/preview-0.jpg" />
 </svelte:head>
 
 <div class="h-full w-full overflow-auto px-4 py-24">

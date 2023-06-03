@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from "$app/stores";
 	import { onMount } from "svelte";
 	import { t } from "svelte-i18n";
 	import { fade } from "svelte/transition";
@@ -18,7 +19,7 @@
 <svelte:head>
 	<title>{$t("welcome")}</title>
 	<meta name="description" content={$t("with-tech")} />
-	<meta property="og:image" content="/images/preview-{night ? 1 : 0}.jpg" />
+	<meta property="og:image" content="{$page.url.origin}/images/preview-{night ? 1 : 0}.jpg" />
 </svelte:head>
 
 <div class="flex h-full w-full items-center justify-center">
