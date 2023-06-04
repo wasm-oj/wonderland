@@ -1,5 +1,6 @@
-import { config } from "$lib/server/config";
+import { config, type CompilerConfig } from "$lib/server/config";
 import { DB } from "$lib/server/sys/db";
+import debug from "debug";
 import { JWT } from "sveltekit-jwt";
 import { error } from "@sveltejs/kit";
 import { fetch_problem, fetch_problem_specs } from "../problem";
@@ -11,9 +12,10 @@ export async function submit(
 	origin: string,
 	submitter_id: string,
 ): Promise<string> {
-	const db = DB();
-
 	const submission_id = generate_submission_id();
+	const db = DB();
+	const log = debug(`submission:submit:${submission_id}`);
+	log.enabled = true;
 
 	const cfg = await config();
 
@@ -22,38 +24,35 @@ export async function submit(
 	}
 
 	const compiler = cfg.compiler[Math.floor(Math.random() * cfg.compiler.length)];
-	console.log("Selected compiler", compiler, submission_id);
+	log("selected compiler", compiler);
 
 	if (cfg.runner.length === 0) {
 		throw error(500, "no runner configured");
 	}
 
 	const runner = cfg.runner[Math.floor(Math.random() * cfg.runner.length)];
-	console.log("Selected runner", runner, submission_id);
+	log("selected runner", runner);
 
 	const specs_p = fetch_problem_specs(problem_id);
 
-	const { success, wasm, message } = await fetch(new URL("compile", compiler.remote), {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			...(compiler.token && { Authorization: `Bearer ${compiler.token}` }),
-		},
-		body: JSON.stringify({ lang, code }),
-	}).then((res) => res.json<{ success: boolean; message: string; hash: string; wasm: string }>());
-
-	if (!success) {
-		console.error("Compilation failed", message, submission_id);
-		throw error(400, message);
-	}
-	console.log("Compilation successful", message, submission_id);
+	const { wasm, version: compiler_version } = await compile(compiler, code, lang).catch((err) => {
+		log("compilation failed", err);
+		throw err;
+	});
 
 	const { specs } = await specs_p;
-	console.log("Fetched specs", specs, submission_id);
+	log("fetched specs", specs);
 
-	const jwt = await JWT.sign({ sub: submission_id, problem: problem_id }, cfg.app.secret);
-	const callback = runner.wait ? null : new URL(`/api/judge/callback/${jwt}`, origin).href;
-	console.log("Callback URL", callback, submission_id);
+	const callback = runner.wait
+		? null
+		: new URL(
+				`/api/judge/callback/${await JWT.sign(
+					{ sub: submission_id, problem: problem_id },
+					cfg.app.secret,
+				)}`,
+				origin,
+		  ).href;
+	log("callback URL", callback);
 
 	const res = await fetch(new URL("judge", runner.remote), {
 		method: "POST",
@@ -69,9 +68,11 @@ export async function submit(
 	});
 
 	if (!res.ok) {
-		console.error("Judge failed", res.status, submission_id);
+		log("judge failed", res.status);
 		throw error(res.status, await res.text());
 	}
+
+	const runner_version = res.headers.get("X-Version") || "";
 
 	const result = await res.json<{
 		error: string | null;
@@ -87,7 +88,7 @@ export async function submit(
 		}[];
 	}>();
 	if (result.error) {
-		console.error("Judge failed", result.error, submission_id);
+		log("judge failed", result.error);
 		throw error(500, result.error);
 	}
 
@@ -95,8 +96,8 @@ export async function submit(
 		.insertInto("Submission")
 		.values({
 			id: submission_id,
-			runner_version: "",
-			compiler_version: "",
+			runner_version,
+			compiler_version,
 			submitter_id,
 			problem_id,
 			code,
@@ -120,6 +121,36 @@ export function generate_submission_id(): string {
 	}
 
 	return id.slice(0, 16);
+}
+
+export async function compile(
+	compiler: CompilerConfig,
+	code: string,
+	lang: string,
+): Promise<{ wasm: string; version: string }> {
+	const res = await fetch(new URL("compile", compiler.remote), {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			...(compiler.token && { Authorization: `Bearer ${compiler.token}` }),
+		},
+		body: JSON.stringify({ lang, code }),
+	});
+
+	const version = res.headers.get("X-Version") || "";
+
+	const { success, wasm, message } = await res.json<{
+		success: boolean;
+		message: string;
+		hash: string;
+		wasm: string;
+	}>();
+
+	if (!success) {
+		throw error(400, message);
+	}
+
+	return { wasm, version };
 }
 
 export async function finalize_submission(
