@@ -25,9 +25,10 @@
 </script>
 
 <div class="group">
-	<pre
-		class="w-full max-w-xl overflow-auto whitespace-pre rounded-md xl:max-w-2xl"
-		class:p-0={!!lang}><code class="language-{lang}" use:highlight>{text}</code></pre>
+	<pre class="w-full max-w-2xl overflow-auto whitespace-pre rounded-md" class:p-0={!!lang}><code
+			class="language-{lang}"
+			use:highlight>{text}</code
+		></pre>
 	<button
 		class="btn-outline btn-sm btn absolute right-0 top-0 m-1 hidden group-hover:block"
 		on:click={copy}
