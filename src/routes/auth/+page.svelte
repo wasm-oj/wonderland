@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto, invalidateAll } from "$app/navigation";
 	import { page } from "$app/stores";
+	import Head from "$lib/component/Head.svelte";
 	import { onMount } from "svelte";
 	import { t } from "svelte-i18n";
 	import type { PageData } from "./$types";
@@ -15,10 +16,7 @@
 	});
 </script>
 
-<svelte:head>
-	<title>WASM OJ Wonderland</title>
-	<meta property="og:image" content="{$page.url.origin}/images/preview-0.jpg" />
-</svelte:head>
+<Head />
 
 <div class="flex h-full w-full items-center justify-center">
 	{#if data.ok}

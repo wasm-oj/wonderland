@@ -3,7 +3,7 @@ import { TokenSchema } from "$lib/token";
 import debug from "debug";
 import { locale, waitLocale } from "svelte-i18n";
 import { checkout } from "sveltekit-jwt";
-import type { Handle, RequestEvent } from "@sveltejs/kit";
+import { redirect, type Handle, type RequestEvent } from "@sveltejs/kit";
 
 const log = debug("app");
 
@@ -11,7 +11,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 	try {
 		await config();
 	} catch {
-		return new Response("Setup not complete, no config found", { status: 500 });
+		if (event.url.pathname.startsWith("/setup")) {
+			return await resolve(event);
+		}
+		throw redirect(302, "/setup");
 	}
 
 	const start = Date.now();

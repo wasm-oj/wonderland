@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from "$app/stores";
 	import { sync } from "$lib/action/file-sync";
+	import Head from "$lib/component/Head.svelte";
 	import Code from "$lib/md/Code.svelte";
 	import Markdown from "$lib/md/Markdown.svelte";
 	import { t } from "svelte-i18n";
@@ -25,14 +26,10 @@
 		data.problem.policy.reduce((acc, cur) => acc + cur.score, 0);
 </script>
 
-<svelte:head>
-	<title>Submit to {data.problem.name} | WASM OJ Wonderland</title>
-	<meta
-		name="description"
-		content={data.problem.description.replace(/\n/g, " ").substring(0, 200)}
-	/>
-	<meta property="og:image" content="{$page.url.origin}/images/preview-0.jpg" />
-</svelte:head>
+<Head
+	title="Submit to {data.problem.name}"
+	description={data.problem.description.substring(0, 240)}
+/>
 
 <div class="h-full w-full overflow-auto">
 	<div class="flex w-full items-center justify-center gap-4 px-4 max-lg:flex-col lg:items-start">

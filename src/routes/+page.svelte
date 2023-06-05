@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from "$app/stores";
+	import Head from "$lib/component/Head.svelte";
 	import { onMount } from "svelte";
 	import { t } from "svelte-i18n";
 	import { fade } from "svelte/transition";
@@ -7,7 +8,7 @@
 
 	export let data: PageData;
 
-	let night = false;
+	let night = !!Math.floor(Math.random() * 2);
 	onMount(() => {
 		night = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
@@ -16,11 +17,7 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{$t("welcome")}</title>
-	<meta name="description" content={$t("with-tech")} />
-	<meta property="og:image" content="{$page.url.origin}/images/preview-{night ? 1 : 0}.jpg" />
-</svelte:head>
+<Head title={$t("welcome")} image="{$page.url.origin}/images/preview-{night ? 1 : 0}.jpg" />
 
 <div class="flex h-full w-full items-center justify-center">
 	{#key night}

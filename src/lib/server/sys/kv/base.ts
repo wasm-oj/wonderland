@@ -16,7 +16,7 @@ export abstract class BaseKV {
 	 * @param ttl The time-to-live for the value in seconds, or undefined for no expiration.
 	 * @returns A Promise that resolves once the value has been set.
 	 */
-	abstract set(key: string, value: string, ttl: number | undefined): Promise<void>;
+	abstract set(key: string, value: string, ttl?: number | undefined): Promise<void>;
 
 	/**
 	 * Deletes the value associated with the given key.

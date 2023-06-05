@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from "$app/stores";
+	import Head from "$lib/component/Head.svelte";
 	import Code from "$lib/md/Code.svelte";
 	import Markdown from "$lib/md/Markdown.svelte";
 	import { t } from "svelte-i18n";
@@ -12,14 +13,7 @@
 		data.problem.policy.reduce((acc, cur) => acc + cur.score, 0);
 </script>
 
-<svelte:head>
-	<title>{data.problem.name} | WASM OJ Wonderland</title>
-	<meta
-		name="description"
-		content={data.problem.description.replace(/\n/g, " ").substring(0, 200)}
-	/>
-	<meta property="og:image" content="{$page.url.origin}/images/preview-0.jpg" />
-</svelte:head>
+<Head title={data.problem.name} description={data.problem.description.substring(0, 240)} />
 
 <div class="h-full w-full overflow-auto px-4 py-24">
 	<div class="flex w-full flex-col items-center">

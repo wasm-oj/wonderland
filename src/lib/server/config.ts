@@ -1,20 +1,19 @@
-import { building, dev } from "$app/environment";
-import { env } from "$env/dynamic/private";
+import { building } from "$app/environment";
 import { z } from "zod";
 import { KV } from "./sys/kv";
 
 export interface CompilerConfig {
 	/** The location of the compiler (remote) */
-	remote?: string;
+	remote: string;
 	/** The token for the remote compiler */
-	token?: string;
+	token: string;
 }
 
 export interface RunnerConfig {
 	/** The location of the runner (remote) */
-	remote?: string;
+	remote: string;
 	/** The token for the remote runner */
-	token?: string;
+	token: string;
 	/**
 	 * Wait for the runner to finish, disable callback machanism.
 	 * This is useful for some serverless runners that stop the process after the request is finished
@@ -55,7 +54,7 @@ const RunnerConfigSchema = z.object({
 });
 
 const ProblemBoxConfigSchema = z.object({
-	remote: z.string().url(),
+	remote: z.string().optional(),
 	username: z.string().optional(),
 	password: z.string().optional(),
 });
@@ -64,7 +63,7 @@ const AppConfigSchema = z.object({
 	secret: z.string(),
 });
 
-const ConfigSchema = z.object({
+export const ConfigSchema = z.object({
 	compiler: z.array(CompilerConfigSchema),
 	runner: z.array(RunnerConfigSchema),
 	problem: ProblemBoxConfigSchema,
@@ -73,6 +72,11 @@ const ConfigSchema = z.object({
 
 let _config: Promise<Config> | undefined = undefined;
 
+/**
+ * Get the config object
+ * @throws If the config is not set
+ * @returns The config object
+ */
 export async function config(): Promise<Config> {
 	if (building) {
 		return { compiler: [], runner: [], problem: {}, app: { secret: "" } };
@@ -86,15 +90,6 @@ export async function config(): Promise<Config> {
 		const config_raw = await KV().get("app:config");
 
 		if (!config_raw) {
-			if (dev) {
-				return {
-					compiler: [],
-					runner: [],
-					problem: { remote: "wasm-oj/problem-box" },
-					app: { secret: env.APP_SECRET || "wow" },
-				};
-			}
-
 			throw new Error("No Config, please set config");
 		}
 
@@ -103,5 +98,12 @@ export async function config(): Promise<Config> {
 		return config;
 	})();
 
-	return _config;
+	return await _config;
+}
+
+/**
+ * Invalidate the config cache, so that the next call to config() will fetch the config from KV
+ */
+export function invalidate() {
+	_config = undefined;
 }

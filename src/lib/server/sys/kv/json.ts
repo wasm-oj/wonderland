@@ -31,8 +31,8 @@ export class JsonKV extends BaseKV {
 			}
 		}
 		const data = JSON.stringify([...this.data]);
-		import(/* @vite-ignore */ module).then(({ writeFile }) => {
-			writeFile(this.file, data, "utf8");
+		import(/* @vite-ignore */ module).then(({ writeFileSync }) => {
+			writeFileSync(this.file, data, "utf8");
 		});
 	}
 
@@ -41,7 +41,10 @@ export class JsonKV extends BaseKV {
 			import(/* @vite-ignore */ module).then(({ existsSync, readFileSync }) => {
 				if (existsSync(this.file)) {
 					const data = readFileSync(this.file, "utf8");
-					this.data = new Map(JSON.parse(data));
+					this.data.clear();
+					for (const [key, [value, ttl]] of JSON.parse(data)) {
+						this.data.set(key, [value, ttl]);
+					}
 					console.log("KV file loaded", this.data.size);
 				}
 				resolve();

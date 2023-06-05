@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from "$app/stores";
+	import Head from "$lib/component/Head.svelte";
 	import { t } from "svelte-i18n";
 	import type { PageData } from "./$types";
 	import Status from "./Status.svelte";
@@ -8,11 +8,7 @@
 	console.log(data);
 </script>
 
-<svelte:head>
-	<title>{$t("nav.submission")} | WASM OJ Wonderland</title>
-	<meta name="description" content={$t("with-tech")} />
-	<meta property="og:image" content="{$page.url.origin}/images/preview-0.jpg" />
-</svelte:head>
+<Head title={$t("nav.submission")} />
 
 <div class="overflow-x-auto px-4 py-24">
 	<table class="table w-full">

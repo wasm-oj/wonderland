@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { invalidateAll } from "$app/navigation";
 	import { page } from "$app/stores";
+	import Head from "$lib/component/Head.svelte";
 	import Code from "$lib/md/Code.svelte";
 	import { onMount } from "svelte";
 	import { t } from "svelte-i18n";
@@ -37,11 +38,7 @@
 		data.problem.policy.reduce((acc, cur) => acc + cur.score, 0);
 </script>
 
-<svelte:head>
-	<title>{$t("nav.submission")} {data.submission.id} | WASM OJ Wonderland</title>
-	<meta name="description" content={$t("with-tech")} />
-	<meta property="og:image" content="{$page.url.origin}/images/preview-0.jpg" />
-</svelte:head>
+<Head title={$t("nav.submission") + " " + data.submission.id} />
 
 <div class="h-full w-full overflow-auto">
 	<div class="flex w-full items-center justify-center gap-4 px-4 max-lg:flex-col lg:items-start">
