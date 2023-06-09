@@ -13,13 +13,13 @@
 		data.problem.policy.reduce((acc, cur) => acc + cur.score, 0);
 </script>
 
-<Head title={data.problem.name} description={data.problem.description.substring(0, 240)} />
+<Head title={data.problem.name} description={data.problem.description} />
 
 <div class="h-full w-full overflow-auto px-4 py-24">
 	<div class="flex w-full flex-col items-center">
-		<div class="prose">
-			<div class="absolute right-0 top-0 z-10">
-				<a class="btn-outline btn-primary btn" href="{$page.url}/submit">Submit</a>
+		<div class="prose w-full">
+			<div class="right-0 top-0 z-10 max-md:mb-4 md:absolute">
+				<a class="btn-primary btn-outline btn" href="{$page.url}/submit">Submit</a>
 			</div>
 
 			<h1>{data.problem.name}</h1>

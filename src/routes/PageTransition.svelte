@@ -4,7 +4,17 @@
 	import { fade } from "svelte/transition";
 
 	let show_content = true;
-	beforeNavigate(() => (show_content = false));
+	beforeNavigate((nav) => {
+		console.log(nav.from?.url.pathname, nav.to?.url.pathname);
+		if (
+			!nav.willUnload &&
+			nav.type === "goto" &&
+			nav.from?.url.pathname === nav.to?.url.pathname
+		) {
+			return;
+		}
+		show_content = false;
+	});
 	afterNavigate(() => (show_content = true));
 </script>
 

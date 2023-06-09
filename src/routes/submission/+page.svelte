@@ -11,7 +11,7 @@
 <Head title={$t("nav.submission")} />
 
 <div class="overflow-x-auto px-4 py-24">
-	<table class="table w-full">
+	<table class="table w-full bg-base-100">
 		<thead>
 			<tr>
 				<th class="!relative">{$t("submission.id")}</th>
@@ -26,7 +26,7 @@
 		</thead>
 		<tbody>
 			{#each data.submissions as submission}
-				<tr class="hover">
+				<tr class="hover top-0 transition-all hover:-top-0.5 hover:shadow-md">
 					<td class="transition-all">
 						<a class="link-hover" href="/submission/{submission.id}">
 							{submission.id}

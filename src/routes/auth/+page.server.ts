@@ -1,22 +1,20 @@
-import { config } from "$lib/server/config";
 import { DB } from "$lib/server/sys/db";
 import { sha256 } from "$lib/utils";
 import debug from "debug";
-import { JWT } from "sveltekit-jwt";
+import { verify, JWT } from "sveltekit-jwt";
 import type { PageServerLoad } from "./$types";
 
 const log = debug("app:auth");
 log.enabled = true;
 
 export const load: PageServerLoad = async ({ url, cookies }) => {
-	const cfg = await config();
-
 	const token = url.searchParams.get("token");
 	if (!token) {
 		return { ok: false };
 	}
 
-	const ok = await JWT.verify(token, cfg.app.secret);
+	const ok = await verify(token);
+	log("token verified", ok);
 	const { payload } = JWT.decode(token);
 
 	if (!ok || !payload.sub) {

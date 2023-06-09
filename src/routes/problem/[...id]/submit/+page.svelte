@@ -26,14 +26,11 @@
 		data.problem.policy.reduce((acc, cur) => acc + cur.score, 0);
 </script>
 
-<Head
-	title="Submit to {data.problem.name}"
-	description={data.problem.description.substring(0, 240)}
-/>
+<Head title="Submit to {data.problem.name}" description={data.problem.description} />
 
 <div class="h-full w-full overflow-auto">
 	<div class="flex w-full items-center justify-center gap-4 px-4 max-lg:flex-col lg:items-start">
-		<div class="prose max-h-screen overflow-auto py-20 max-lg:hidden">
+		<div class="prose max-h-screen w-full overflow-auto py-20 max-lg:hidden">
 			<h1>{data.problem.name}</h1>
 			<Markdown source={data.problem.description} />
 

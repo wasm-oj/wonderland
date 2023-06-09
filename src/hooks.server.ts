@@ -21,7 +21,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	await set_lang(event);
 
-	const token = await checkout(event, (await config()).app.secret);
+	const token = await checkout(event);
 	if (token) {
 		console.log("token", token);
 		event.locals.token = TokenSchema.parse(token);
