@@ -31,7 +31,9 @@ export interface ProblemBoxConfig {
 }
 
 export interface AppConfig {
-	/** The secret for signing and verifying JWT */
+	/** The PEA endpoint for login */
+	pea: string;
+	/** The secret to sign runner callback */
 	secret: string;
 }
 
@@ -60,7 +62,8 @@ const ProblemBoxConfigSchema = z.object({
 });
 
 const AppConfigSchema = z.object({
-	secret: z.string(),
+	pea: z.string().url(),
+	secret: z.string().default("WASM_OJ_WONDERLAND"),
 });
 
 export const ConfigSchema = z.object({
@@ -79,7 +82,12 @@ let _config: Promise<Config> | undefined = undefined;
  */
 export async function config(): Promise<Config> {
 	if (building) {
-		return { compiler: [], runner: [], problem: {}, app: { secret: "" } };
+		return {
+			compiler: [],
+			runner: [],
+			problem: {},
+			app: { pea: "https://pea.csie.cool/app/wasm-oj", secret: "WASM_OJ_WONDERLAND" },
+		};
 	}
 
 	if (_config) {

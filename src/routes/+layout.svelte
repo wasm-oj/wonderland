@@ -29,7 +29,7 @@
 					</a>
 				</li>
 				<li class:hidden={!!data.token}>
-					<a href="https://pea.csie.cool/app/wasm-oj?cb={$page.url.origin}/auth">
+					<a href="{data.pea}?cb={$page.url.origin}/auth">
 						<Icon icon="octicon:sign-in-16" inline />
 						<span class="hidden sm:inline-block">{$t("nav.login")}</span>
 					</a>

@@ -18,7 +18,7 @@ export const load = async ({ locals }) => {
 			problem: {
 				remote: "wasm-oj/problem-box",
 			},
-			app: { secret: "" },
+			app: { pea: "https://pea.csie.cool/app/wasm-oj", secret: "WASM_OJ_WONDERLAND" },
 		},
 		ConfigSchema,
 	);

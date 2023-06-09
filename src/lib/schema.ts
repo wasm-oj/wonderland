@@ -18,7 +18,8 @@ const ProblemBoxConfigSchema = z.object({
 });
 
 const AppConfigSchema = z.object({
-	secret: z.string(),
+	pea: z.string(),
+	secret: z.string().default("WASM_OJ_WONDERLAND"),
 });
 
 export const ConfigSchema = z.object({
