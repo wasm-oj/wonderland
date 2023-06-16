@@ -4,6 +4,7 @@
 	import { onMount } from "svelte";
 	import { t } from "svelte-i18n";
 	import { fade } from "svelte/transition";
+	import Icon from "@iconify/svelte";
 	import type { PageData } from "./$types";
 
 	export let data: PageData;
@@ -31,6 +32,54 @@
 	<div class="prose">
 		<h1>{$t("welcome")}</h1>
 		<p>{$t("with-tech")}</p>
+
+		<div class="stats w-full bg-opacity-50 shadow transition-all hover:shadow-md">
+			<div class="group stat">
+				<div
+					class="stat-figure top-0 transition-all group-hover:top-1 group-hover:drop-shadow-md"
+				>
+					<Icon icon="octicon:person-16" class="inline-block h-8 w-8 text-primary" />
+				</div>
+				<div
+					class="stat-value top-0 transition-all delay-75 group-hover:-top-1 group-hover:scale-110 group-hover:drop-shadow-md"
+				>
+					{data.stat.user}
+				</div>
+			</div>
+
+			<a class="contents" href="/problem">
+				<div class="group stat">
+					<div
+						class="stat-figure top-0 transition-all group-hover:top-1 group-hover:drop-shadow-md"
+					>
+						<Icon icon="octicon:apps-16" class="inline-block h-8 w-8 text-primary" />
+					</div>
+					<div
+						class="stat-value top-0 transition-all delay-75 group-hover:-top-1 group-hover:scale-110 group-hover:drop-shadow-md"
+					>
+						{data.stat.problem}
+					</div>
+				</div>
+			</a>
+
+			<a class="contents" href="/submission">
+				<div class="group stat">
+					<div
+						class="stat-figure top-0 transition-all group-hover:top-1 group-hover:drop-shadow-md"
+					>
+						<Icon
+							icon="octicon:git-commit-16"
+							class="inline-block h-6 w-6 text-primary"
+						/>
+					</div>
+					<div
+						class="stat-value top-0 transition-all delay-75 group-hover:-top-1 group-hover:scale-110 group-hover:drop-shadow-md"
+					>
+						{data.stat.submission}
+					</div>
+				</div>
+			</a>
+		</div>
 
 		<div class="divider" />
 
