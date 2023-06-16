@@ -26,7 +26,7 @@ export const load = (async ({ url, cookies }) => {
 		httpOnly: true,
 		secure: true,
 		sameSite: "strict",
-		maxAge: 60 * 60 * 12,
+		maxAge: payload.exp ? Math.floor(payload.exp - Date.now() / 1000) : undefined,
 	});
 
 	const id = await sha256(payload.sub);
@@ -50,5 +50,5 @@ export const load = (async ({ url, cookies }) => {
 		log("new user", id);
 	}
 
-	return { ok: true };
+	return { ok: true, new: result.numInsertedOrUpdatedRows === 1n };
 }) satisfies PageServerLoad;
