@@ -47,6 +47,10 @@
 			tags = [...(tags ?? []), tag];
 		}
 	}
+
+	function calc_ac(sub: Record<string, number>): number {
+		return ((sub.AC || 0) / (Object.values(sub).reduce((a, b) => a + b, 0) || 1)) * 100;
+	}
 </script>
 
 <Head title={$t("nav.problem")} />
@@ -76,13 +80,14 @@
 	<table class="table w-full bg-base-100">
 		<thead>
 			<tr>
-				<th class="w-1/4 max-w-xs">{$t("problem.id")}</th>
+				<th class="w-1/6 max-w-xs">{$t("problem.id")}</th>
 				<th class="w-1/2">{$t("problem.problem")}</th>
-				<th class="w-1/4 max-w-xs">{$t("problem.tags")}</th>
+				<th class="w-1/6 max-w-xs">{$t("problem.tags")}</th>
+				<th class="w-1/6 max-w-xs">{$t("problem.ac-rate")}</th>
 			</tr>
 		</thead>
 		<tbody>
-			{#each problems as problem}
+			{#each problems as problem (problem.id)}
 				<a class="contents" href="/problem/{problem.id}">
 					<tr class="hover top-0 transition-all hover:-top-0.5 hover:shadow-md">
 						<td class="transition-all">{problem.id}</td>
@@ -100,6 +105,15 @@
 									{tag}
 								</button>
 							{/each}
+						</td>
+						<td
+							class="transition-all"
+							class:text-success={calc_ac(problem.sub) >= 80}
+							class:text-warning={calc_ac(problem.sub) >= 50 &&
+								calc_ac(problem.sub) < 80}
+							class:text-error={calc_ac(problem.sub) < 50}
+						>
+							{calc_ac(problem.sub).toFixed(1)}%
 						</td>
 					</tr>
 				</a>

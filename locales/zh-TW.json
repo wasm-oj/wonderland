@@ -9,6 +9,7 @@
 		"submission": "提交"
 	},
 	"problem": {
+		"ac-rate": "通過比例",
 		"description": "說明",
 		"hint": "提示",
 		"id": "編號",

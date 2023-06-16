@@ -9,6 +9,7 @@
 		"submission": "Submission"
 	},
 	"problem": {
+		"ac-rate": "AC Rate",
 		"description": "Description",
 		"hint": "Hint",
 		"id": "ID",

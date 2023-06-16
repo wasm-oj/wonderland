@@ -189,7 +189,7 @@
 			<div class="divider" />
 
 			<button
-				class="btn"
+				class="btn-primary btn"
 				class:animate-pulse={$submitting}
 				disabled={$form.lang === $t("submit.select-language") || !$form.code || $submitting}
 				>{$t("submit.submit")}</button
