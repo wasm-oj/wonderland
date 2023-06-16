@@ -12,6 +12,7 @@ const config = {
 		adapter: process.env.BUILD_NODE ? node_adapter() : adapter(),
 		alias: {
 			"$i18n/*": "./locales/*",
+			"$routes/*": "./src/routes/*",
 		},
 	},
 };

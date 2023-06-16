@@ -4,7 +4,7 @@ import { down, up } from "$lib/server/sys/db/migration";
 import { error, json } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 
-export const GET: RequestHandler = async ({ params, locals }) => {
+export const GET = (async ({ params, locals }) => {
 	only_admin(locals);
 
 	const db = DB();
@@ -23,4 +23,4 @@ export const GET: RequestHandler = async ({ params, locals }) => {
 	}
 
 	throw error(404, "Not found");
-};
+}) satisfies RequestHandler;
