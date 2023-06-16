@@ -1,7 +1,7 @@
 import { config } from "$lib/server/config";
 import type { PageServerLoad } from "./$types";
 
-export const load: PageServerLoad = async () => {
+export const load = (async () => {
 	const cfg = await config();
 	return {
 		cfg: {
@@ -9,4 +9,4 @@ export const load: PageServerLoad = async () => {
 			runners: cfg.runner.length,
 		},
 	};
-};
+}) satisfies PageServerLoad;

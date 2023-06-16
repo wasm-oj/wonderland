@@ -3,9 +3,9 @@ import { only_admin } from "$lib/server/permission";
 import { KV } from "$lib/server/sys/kv";
 import { superValidate } from "sveltekit-superforms/server";
 import { error, redirect } from "@sveltejs/kit";
-import type { Actions } from "./$types";
+import type { Actions, PageServerLoad } from "./$types";
 
-export const load = async ({ locals }) => {
+export const load = (async ({ locals }) => {
 	const cfg = await config().catch(() => null);
 	if (cfg) {
 		only_admin(locals);
@@ -24,9 +24,9 @@ export const load = async ({ locals }) => {
 	);
 
 	return { form };
-};
+}) satisfies PageServerLoad;
 
-export const actions: Actions = {
+export const actions = {
 	default: async ({ request, locals }) => {
 		const cfg = await config().catch(() => null);
 		if (cfg) {
@@ -45,4 +45,4 @@ export const actions: Actions = {
 
 		throw redirect(302, "/");
 	},
-};
+} satisfies Actions;

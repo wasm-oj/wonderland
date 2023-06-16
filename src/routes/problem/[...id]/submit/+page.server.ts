@@ -2,16 +2,16 @@ import { submit } from "$lib/server/submission";
 import { sha256 } from "$lib/utils";
 import { superValidate } from "sveltekit-superforms/server";
 import { error, redirect } from "@sveltejs/kit";
-import type { Actions } from "./$types";
+import type { Actions, PageServerLoad } from "./$types";
 import { schema } from "./schema";
 
-export const load = async () => {
+export const load = (async () => {
 	const form = await superValidate(schema);
 
 	return { form };
-};
+}) satisfies PageServerLoad;
 
-export const actions: Actions = {
+export const actions = {
 	default: async ({ params, request, locals, platform }) => {
 		if (!locals.token) {
 			throw error(401, "Unauthorized");
@@ -60,4 +60,4 @@ export const actions: Actions = {
 
 		throw redirect(302, `/submission/${submission_id}`);
 	},
-};
+} satisfies Actions;

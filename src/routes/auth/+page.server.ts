@@ -7,7 +7,7 @@ import type { PageServerLoad } from "./$types";
 const log = debug("app:auth");
 log.enabled = true;
 
-export const load: PageServerLoad = async ({ url, cookies }) => {
+export const load = (async ({ url, cookies }) => {
 	const token = url.searchParams.get("token");
 	if (!token) {
 		return { ok: false };
@@ -51,4 +51,4 @@ export const load: PageServerLoad = async ({ url, cookies }) => {
 	}
 
 	return { ok: true };
-};
+}) satisfies PageServerLoad;

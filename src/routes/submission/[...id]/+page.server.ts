@@ -4,7 +4,7 @@ import { sha256 } from "$lib/utils";
 import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 
-export const load: PageServerLoad = async ({ params, locals }) => {
+export const load = (async ({ params, locals }) => {
 	const db = DB();
 
 	const submission = await db
@@ -31,4 +31,4 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		submission,
 		problem,
 	};
-};
+}) satisfies PageServerLoad;

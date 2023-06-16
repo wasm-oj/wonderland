@@ -1,7 +1,7 @@
 import { DB } from "$lib/server/sys/db";
 import type { PageServerLoad } from "./$types";
 
-export const load: PageServerLoad = async ({ url }) => {
+export const load = (async ({ url }) => {
 	const db = DB();
 
 	const page = parseInt(url.searchParams.get("page") ?? "1") || 1;
@@ -46,4 +46,4 @@ export const load: PageServerLoad = async ({ url }) => {
 	const submissions = await query.execute();
 
 	return { submissions };
-};
+}) satisfies PageServerLoad;
