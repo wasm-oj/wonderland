@@ -7,13 +7,13 @@ export interface GradingPolicy {
 export type GradingPolicies = GradingPolicy[];
 
 export interface Testcase {
-	stdin: string | undefined;
-	stdout: string | undefined;
-	stdin_file: string | undefined;
-	stdout_file: string | undefined;
+	stdin?: string | undefined;
+	stdout?: string | undefined;
+	stdin_file?: string | undefined;
+	stdout_file?: string | undefined;
 	score: number;
-	description: string | undefined;
-	sample: boolean | undefined;
+	description?: string | undefined;
+	sample?: boolean | undefined;
 }
 
 export type Testcases = Testcase[];
@@ -21,11 +21,12 @@ export type Testcases = Testcase[];
 export interface Problem {
 	name: string;
 	description: string;
+	tags?: string[] | undefined;
 	policy: GradingPolicies;
 	testcase: Testcases;
-	input: string | undefined;
-	output: string | undefined;
-	hint: string | undefined;
+	input?: string | undefined;
+	output?: string | undefined;
+	hint?: string | undefined;
 }
 
 export interface ProblemSpecs {

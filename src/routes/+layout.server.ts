@@ -1,9 +1,8 @@
-import { config } from "$lib/server/config";
+import api from "$api";
+import * as route from "$api/me/GET";
 import type { LayoutServerLoad } from "./$types";
 
-export const load = (async ({ locals }) => {
-	return {
-		token: locals.token,
-		pea: (await config()).app.pea,
-	};
+export const load = (async (evt) => {
+	const inputs = await api.parse(route, evt);
+	return route.default(inputs, evt);
 }) satisfies LayoutServerLoad;

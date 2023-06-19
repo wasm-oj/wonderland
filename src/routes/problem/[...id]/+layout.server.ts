@@ -1,10 +1,8 @@
-import { fetch_problem } from "$lib/server/problem";
+import api from "$api";
+import * as route from "$api/problem/[...id]/GET";
 import type { LayoutServerLoad } from "./$types";
 
-export const load = (async ({ platform, params }) => {
-	const problem = await fetch_problem(params.id, platform);
-
-	return {
-		problem,
-	};
+export const load = (async (evt) => {
+	const inputs = await api.parse(route, evt);
+	return route.default(inputs, evt);
 }) satisfies LayoutServerLoad;

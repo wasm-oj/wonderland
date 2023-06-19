@@ -1,4 +1,4 @@
-interface User {
+export interface User {
 	id: string; // PK, hash of email
 	email: string;
 	name: string;
@@ -6,7 +6,7 @@ interface User {
 	avatar: string;
 }
 
-interface Submission {
+export interface Submission {
 	id: string; // PK, hash of time and random entropy
 	submitter_id: string; // FK
 	status: "running" | "AC" | "WA" | "SLE" | "MLE" | "RE" | "error";

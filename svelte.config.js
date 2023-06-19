@@ -13,6 +13,8 @@ const config = {
 		alias: {
 			"$i18n/*": "./locales/*",
 			"$routes/*": "./src/routes/*",
+			"$api/*": "./src/api/*",
+			$api: "./src/api/index",
 		},
 	},
 };

@@ -1,7 +1,4 @@
-import { load2api } from "$lib/server/load2api";
-import { load } from "$routes/submission/[...id]/+page.server";
+import api from "$api";
 import type { RequestHandler } from "./$types";
 
-export const GET = (async (evt) => {
-	return load2api("/submission/[...id]", load, evt);
-}) satisfies RequestHandler;
+export const GET = ((evt) => api.handle(evt)) satisfies RequestHandler;
