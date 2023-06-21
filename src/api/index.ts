@@ -1,4 +1,5 @@
 import { API } from "sveltekit-api";
+import { version, author } from "../../package.json";
 
 const api = new API(
 	import.meta.glob("./**/*.ts"),
@@ -6,8 +7,13 @@ const api = new API(
 		openapi: "3.0.0",
 		info: {
 			title: "WASM OJ Wonderland API",
-			version: "1.0.0",
+			version: version,
 			description: "You can interact with WASM OJ Wonderland through this API",
+			license: {
+				name: "MIT",
+				url: "https://github.com/wasm-oj/wonderland/blob/main/LICENSE",
+			},
+			contact: author,
 		},
 		servers: [
 			{
