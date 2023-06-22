@@ -1,6 +1,6 @@
 {
 	"$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
-	"changelog": ["@changesets/changelog-github", { "repo": "wasm-oj/wow" }],
+	"changelog": ["@changesets/changelog-github", { "repo": "wasm-oj/wonderland" }],
 	"commit": false,
 	"fixed": [],
 	"linked": [],
