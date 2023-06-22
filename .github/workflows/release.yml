@@ -28,6 +28,8 @@ jobs:
             - name: Build
               run: BUILD_NODE=1 pnpm build
 
+            - uses: dtolnay/rust-toolchain@stable
+
             - name: Create Release Pull Request or Publish to NPM
               id: changesets
               uses: changesets/action@v1

@@ -1,9 +1,10 @@
 import { submit } from "$lib/server/submission";
 import { sha256 } from "$lib/utils";
 import { z } from "sveltekit-api";
-import { error, type RequestEvent } from "@sveltejs/kit";
-
-export * from "./shared";
+import type { RouteConfig } from "sveltekit-api";
+import { error } from "@sveltejs/kit";
+import type { RequestEvent } from "@sveltejs/kit";
+import { Modifier as _Modifier } from "./shared";
 
 export const Input = z.object({
 	problem: z.string().min(1).max(128).describe("Problem ID"),
@@ -22,6 +23,12 @@ export const Output = z.object({
 export const Error = {
 	400: error(400, "Bad Request"),
 	401: error(401, "Unauthorized"),
+};
+
+export const Modifier = (r: RouteConfig) => {
+	_Modifier(r);
+	r.security = [{ bearerAuth: [] }];
+	return r;
 };
 
 export default async function (

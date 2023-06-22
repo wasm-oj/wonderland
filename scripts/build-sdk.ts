@@ -162,7 +162,15 @@ async function build_python_sdk(): Promise<string | Skip> {
 	fs.rmSync(path.join(dir, "git_push.sh"));
 
 	log("Building package ...");
-	await run(["python setup.py sdist bdist_wheel", "twine check dist/*"], dir, log);
+	await run(
+		[
+			"python -m pip install build twine",
+			"python setup.py sdist bdist_wheel",
+			"twine check dist/*",
+		],
+		dir,
+		log,
+	);
 
 	log("Created Python SDK");
 

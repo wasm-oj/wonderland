@@ -1,6 +1,7 @@
 import { config } from "$lib/server/config";
 import { sha256 } from "$lib/utils";
 import { z } from "sveltekit-api";
+import type { RouteConfig } from "sveltekit-api";
 import type { RequestEvent } from "@sveltejs/kit";
 
 export const Output = z.object({
@@ -9,6 +10,11 @@ export const Output = z.object({
 	exp: z.number().optional().describe("Token expiration time, in seconds since epoch"),
 	pea: z.string().describe("The PEA login URL that this app uses"),
 });
+
+export const Modifier = (r: RouteConfig) => {
+	r.security = [{ bearerAuth: [] }];
+	return r;
+};
 
 export default async function (
 	_: Record<never, never>,
