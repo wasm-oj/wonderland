@@ -15,6 +15,9 @@ const api = new API(
 			},
 			contact: author,
 		},
+		externalDocs: {
+			url: "https://github.com/wasm-oj/wonderland",
+		},
 		servers: [
 			{
 				url: "{protocol}://{host}",

@@ -7,6 +7,8 @@ import { z } from "sveltekit-api";
 import { error } from "@sveltejs/kit";
 import type { RequestEvent } from "@sveltejs/kit";
 
+export * from "../shared";
+
 export const Param = z.object({
 	id: z.string().describe("Submission ID"),
 });

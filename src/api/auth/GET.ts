@@ -5,6 +5,8 @@ import { z } from "sveltekit-api";
 import { JWT, verify } from "sveltekit-jwt";
 import { error, type RequestEvent } from "@sveltejs/kit";
 
+export * from "./shared";
+
 const log = debug("app:auth");
 log.enabled = true;
 

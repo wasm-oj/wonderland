@@ -1,6 +1,8 @@
 import { DB } from "$lib/server/sys/db";
 import { z } from "sveltekit-api";
 
+export * from "./shared";
+
 export const Query = z.object({
 	page: z
 		.string()

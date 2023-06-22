@@ -3,6 +3,8 @@ import { DB } from "$lib/server/sys/db";
 import { z } from "sveltekit-api";
 import type { RequestEvent } from "@sveltejs/kit";
 
+export * from "./shared";
+
 export const Output = z.object({
 	problems: z
 		.array(

@@ -2,6 +2,8 @@ import { fetch_problem, type Problem } from "$lib/server/problem";
 import { z } from "sveltekit-api";
 import type { RequestEvent } from "@sveltejs/kit";
 
+export * from "../shared";
+
 export const Param = z.object({
 	id: z.string().describe("Problem ID"),
 });

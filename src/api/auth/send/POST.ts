@@ -2,6 +2,8 @@ import { config } from "$lib/server/config";
 import { z } from "sveltekit-api";
 import { error, type RequestEvent } from "@sveltejs/kit";
 
+export * from "../shared";
+
 export const Input = z.object({
 	email: z.string().email().min(1).max(128).describe("User's email address"),
 	ttl: z.number().int().min(1).max(30).default(1).describe("Token's time to live in days"),
@@ -28,6 +30,7 @@ export default async function (
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
+			"User-Agent": evt.url.origin,
 		},
 		body: JSON.stringify({
 			email: input.email,
@@ -37,6 +40,7 @@ export default async function (
 	});
 
 	if (!res.ok) {
+		console.error(await res.text());
 		throw Error[502];
 	}
 

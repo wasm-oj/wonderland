@@ -3,6 +3,8 @@ import { sha256 } from "$lib/utils";
 import { z } from "sveltekit-api";
 import { error, type RequestEvent } from "@sveltejs/kit";
 
+export * from "./shared";
+
 export const Input = z.object({
 	problem: z.string().min(1).max(128).describe("Problem ID"),
 	code: z
