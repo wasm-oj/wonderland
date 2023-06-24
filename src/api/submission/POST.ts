@@ -1,7 +1,7 @@
 import { submit } from "$lib/server/submission";
 import { sha256 } from "$lib/utils";
 import { z } from "sveltekit-api";
-import type { RouteConfig } from "sveltekit-api";
+import type { RouteModifier } from "sveltekit-api";
 import { error } from "@sveltejs/kit";
 import type { RequestEvent } from "@sveltejs/kit";
 import { Modifier as _Modifier } from "./shared";
@@ -25,9 +25,10 @@ export const Error = {
 	401: error(401, "Unauthorized"),
 };
 
-export const Modifier = (r: RouteConfig) => {
+export const Modifier: RouteModifier = (r) => {
 	_Modifier(r);
 	r.security = [{ bearerAuth: [] }];
+	r.operationId = "submit";
 	return r;
 };
 

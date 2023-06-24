@@ -1,6 +1,6 @@
-import type { RouteConfig } from "sveltekit-api";
+import type { RouteModifier } from "sveltekit-api";
 
-export const Modifier = (r: RouteConfig) => {
+export const Modifier: RouteModifier = (r) => {
 	r.tags = ["Problem"];
 	return r;
 };
