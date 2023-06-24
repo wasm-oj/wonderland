@@ -1,7 +1,7 @@
 import { DB } from "$lib/server/sys/db";
 import { z } from "sveltekit-api";
-
-export * from "./shared";
+import type { RouteModifier } from "sveltekit-api";
+import { Modifier as _Modifier } from "./shared";
 
 export const Query = z.object({
 	page: z
@@ -29,6 +29,12 @@ export const Output = z.object({
 		}),
 	),
 });
+
+export const Modifier: RouteModifier = (r) => {
+	_Modifier(r);
+	r.operationId = "list_submissions";
+	return r;
+};
 
 export default async function (param: z.infer<typeof Query>): Promise<z.infer<typeof Output>> {
 	const db = DB();

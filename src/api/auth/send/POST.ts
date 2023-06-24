@@ -1,8 +1,7 @@
 import { config } from "$lib/server/config";
-import { z } from "sveltekit-api";
+import { z, type RouteModifier } from "sveltekit-api";
 import { error, type RequestEvent } from "@sveltejs/kit";
-
-export * from "../shared";
+import { Modifier as _Modifier } from "../shared";
 
 export const Input = z.object({
 	email: z.string().email().min(1).max(128).describe("User's email address"),
@@ -16,6 +15,12 @@ export const Output = z.object({
 
 export const Error = {
 	502: error(502, "Failed to send email"),
+};
+
+export const Modifier: RouteModifier = (r) => {
+	_Modifier(r);
+	r.operationId = "login";
+	return r;
 };
 
 export default async function (

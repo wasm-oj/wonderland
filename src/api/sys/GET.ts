@@ -2,6 +2,7 @@ import { config } from "$lib/server/config";
 import { list_problems } from "$lib/server/problem";
 import { DB } from "$lib/server/sys/db";
 import { z } from "sveltekit-api";
+import type { RouteModifier } from "sveltekit-api";
 
 export const Output = z.object({
 	cfg: z.object({
@@ -14,6 +15,12 @@ export const Output = z.object({
 		problem: z.number().describe("Number of problems"),
 	}),
 });
+
+export const Modifier: RouteModifier = (r) => {
+	r.tags = ["System"];
+	r.operationId = "system";
+	return r;
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default async function (_: Record<never, never>): Promise<z.infer<typeof Output>> {

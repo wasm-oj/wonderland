@@ -1,7 +1,7 @@
 import { config } from "$lib/server/config";
 import { sha256 } from "$lib/utils";
 import { z } from "sveltekit-api";
-import type { RouteConfig } from "sveltekit-api";
+import type { RouteModifier } from "sveltekit-api";
 import type { RequestEvent } from "@sveltejs/kit";
 
 export const Output = z.object({
@@ -11,7 +11,9 @@ export const Output = z.object({
 	pea: z.string().describe("The PEA login URL that this app uses"),
 });
 
-export const Modifier = (r: RouteConfig) => {
+export const Modifier: RouteModifier = (r) => {
+	r.tags = ["Auth"];
+	r.operationId = "me";
 	r.security = [{ bearerAuth: [] }];
 	return r;
 };

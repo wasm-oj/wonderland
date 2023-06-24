@@ -2,10 +2,10 @@ import { DB } from "$lib/server/sys/db";
 import { sha256 } from "$lib/utils";
 import debug from "debug";
 import { z } from "sveltekit-api";
+import type { RouteModifier } from "sveltekit-api";
 import { JWT, verify } from "sveltekit-jwt";
 import { error, type RequestEvent } from "@sveltejs/kit";
-
-export * from "./shared";
+import { Modifier as _Modifier } from "./shared";
 
 const log = debug("app:auth");
 log.enabled = true;
@@ -21,6 +21,12 @@ export const Output = z.object({
 
 export const Error = {
 	400: error(400, "Token is invalid"),
+};
+
+export const Modifier: RouteModifier = (r) => {
+	_Modifier(r);
+	r.operationId = "auth";
+	return r;
 };
 
 export default async function (

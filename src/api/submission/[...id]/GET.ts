@@ -4,10 +4,10 @@ import { DB } from "$lib/server/sys/db";
 import type { Submission } from "$lib/server/sys/db/schema";
 import { sha256 } from "$lib/utils";
 import { z } from "sveltekit-api";
+import type { RouteModifier } from "sveltekit-api";
 import { error } from "@sveltejs/kit";
 import type { RequestEvent } from "@sveltejs/kit";
-
-export * from "../shared";
+import { Modifier as _Modifier } from "../shared";
 
 export const Param = z.object({
 	id: z.string().describe("Submission ID"),
@@ -61,6 +61,12 @@ export const Output = z.object({
 
 export const Error = {
 	404: error(404, "Submission not found"),
+};
+
+export const Modifier: RouteModifier = (r) => {
+	_Modifier(r);
+	r.operationId = "get_submission";
+	return r;
 };
 
 export default async function (

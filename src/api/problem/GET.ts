@@ -1,9 +1,9 @@
 import { list_problems } from "$lib/server/problem";
 import { DB } from "$lib/server/sys/db";
 import { z } from "sveltekit-api";
+import type { RouteModifier } from "sveltekit-api";
 import type { RequestEvent } from "@sveltejs/kit";
-
-export * from "./shared";
+import { Modifier as _Modifier } from "./shared";
 
 export const Output = z.object({
 	problems: z
@@ -19,6 +19,12 @@ export const Output = z.object({
 		)
 		.describe("List of problems"),
 });
+
+export const Modifier: RouteModifier = (r) => {
+	_Modifier(r);
+	r.operationId = "list_problems";
+	return r;
+};
 
 export default async function (
 	_query: Record<never, never>,

@@ -1,8 +1,7 @@
 import { fetch_problem, type Problem } from "$lib/server/problem";
-import { z } from "sveltekit-api";
+import { z, type RouteModifier } from "sveltekit-api";
 import type { RequestEvent } from "@sveltejs/kit";
-
-export * from "../shared";
+import { Modifier as _Modifier } from "../shared";
 
 export const Param = z.object({
 	id: z.string().describe("Problem ID"),
@@ -36,6 +35,12 @@ export const Output = z.object({
 		hint: z.string().optional(),
 	}),
 }) satisfies z.ZodSchema<{ problem: Problem }>;
+
+export const Modifier: RouteModifier = (r) => {
+	_Modifier(r);
+	r.operationId = "get_problem";
+	return r;
+};
 
 export default async function (
 	param: z.infer<typeof Param>,
