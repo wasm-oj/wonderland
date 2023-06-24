@@ -25,6 +25,11 @@ jobs:
               with:
                   run_install: true
 
+            - name: Set Git User
+              run: |
+                  git config --global user.name "JacobLinCool"
+                  git config --global user.email "jacob@csie.cool"
+
             - name: Build
               run: BUILD_NODE=1 pnpm build
 
