@@ -1,5 +1,11 @@
 # @wasm-oj/wonderland
 
+## 0.0.3
+
+### Patch Changes
+
+-   [`201f614`](https://github.com/wasm-oj/wonderland/commit/201f614fc5638d8f3345eabeee0199d3f165ba65) Thanks [@JacobLinCool](https://github.com/JacobLinCool)! - Add operation id for all API endpoints
+
 ## 0.0.2
 
 ### Patch Changes
