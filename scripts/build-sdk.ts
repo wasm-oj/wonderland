@@ -257,7 +257,7 @@ async function build(
 	return run(
 		[
 			[
-				"docker run --rm",
+				"docker run --rm --user $(id -u):$(id -g)",
 				"-v ${PWD}/sdk:/local openapitools/openapi-generator-cli generate",
 				"-i /local/openapi.json",
 				`-g ${lang}`,
