@@ -52,3 +52,13 @@ CACHE_COMPONENT="..."
 ```
 
 > See [src/lib/server/platform.ts](src/lib/server/platform.ts) for more details.
+
+## API
+
+The API documentation is available at [https://woj.csie.cool/api](https://woj.csie.cool/api).
+
+There are 3 official clients:
+
+- Rust: [wasm-oj/woj-rs](https://github.com/wasm-oj/woj-rs)
+- TypeScript / JavaScript: [wasm-oj/woj-ts](https://github.com/wasm-oj/woj-ts)
+- Python: [wasm-oj/woj-py](https://github.com/wasm-oj/woj-py)
