@@ -1,5 +1,11 @@
 # @wasm-oj/wonderland
 
+## 0.0.4
+
+### Patch Changes
+
+-   [`8a74574`](https://github.com/wasm-oj/wonderland/commit/8a745749852ed95d9e3181639358d34d94083c92) Thanks [@JacobLinCool](https://github.com/JacobLinCool)! - Add device option for login email
+
 ## 0.0.3
 
 ### Patch Changes
