@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto, invalidateAll } from "$app/navigation";
-	import { page } from "$app/stores";
 	import Head from "$lib/component/Head.svelte";
 	import { onMount } from "svelte";
 	import { t } from "svelte-i18n";

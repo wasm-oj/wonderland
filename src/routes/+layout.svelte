@@ -28,7 +28,7 @@
 						<span class="hidden sm:inline-block">{$t("nav.submission")}</span>
 					</a>
 				</li>
-				<li class:hidden={!!data.token}>
+				<li class:hidden={!!data.email}>
 					<a href="{data.pea}?cb={$page.url.origin}/auth">
 						<Icon icon="octicon:sign-in-16" inline />
 						<span class="hidden sm:inline-block">{$t("nav.login")}</span>

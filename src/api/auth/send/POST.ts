@@ -6,6 +6,7 @@ import { Modifier as _Modifier } from "../shared";
 export const Input = z.object({
 	email: z.string().email().min(1).max(128).describe("User's email address"),
 	ttl: z.number().int().min(1).max(30).default(1).describe("Token's time to live in days"),
+	device: z.boolean().default(false).describe("Whether the token is for device login"),
 });
 
 export const Output = z.object({
@@ -39,7 +40,7 @@ export default async function (
 		},
 		body: JSON.stringify({
 			email: input.email,
-			callback: evt.url.origin + "/api/auth",
+			callback: evt.url.origin + (input.device ? "/auth/device" : "/auth"),
 			ttl: input.ttl * 24 * 60,
 		}),
 	});

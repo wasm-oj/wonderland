@@ -1,5 +1,9 @@
 {
 	"auth": {
+		"copied": "已複製",
+		"copy": "複製",
+		"device-token": "裝置授權碼",
+		"device-token-description": "在信任的應用程式中輸入此授權碼以進行授權。",
 		"invalid-token": "登入無效，請重試"
 	},
 	"compilers-and-runners": "此實例配置了 {compilers} 個編譯伺服器和 {runners} 個運行伺服器。",

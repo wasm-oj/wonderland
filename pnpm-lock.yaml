@@ -125,8 +125,8 @@ devDependencies:
         specifier: ^0.2.3
         version: 0.2.3(svelte@3.59.1)
     sveltekit-api:
-        specifier: ^0.2.12
-        version: 0.2.12(@sveltejs/kit@1.20.2)(svelte@3.59.1)
+        specifier: ^0.2.13
+        version: 0.2.13(@sveltejs/kit@1.20.2)(svelte@3.59.1)
     sveltekit-jwt:
         specifier: ^0.2.0
         version: 0.2.0(svelte@3.59.1)
@@ -6551,10 +6551,10 @@ packages:
         engines: { node: ">= 8" }
         dev: true
 
-    /sveltekit-api@0.2.12(@sveltejs/kit@1.20.2)(svelte@3.59.1):
+    /sveltekit-api@0.2.13(@sveltejs/kit@1.20.2)(svelte@3.59.1):
         resolution:
             {
-                integrity: sha512-78UAo9s156NWleTXfK2sh+wQVdfkuospY4fiDZ7WCli993c2PaeoksI7wkQ+notYVikFQ3lwLc68dgvMIUo7ug==,
+                integrity: sha512-KOKdsbX5A50b4+bRpPXV9/Fxamn3convNdV/3POKM89yyQh8C9F00CSOfT+N8UTF50L3wrUrRq2mdlUd3aSLfg==,
             }
         peerDependencies:
             "@sveltejs/kit": ^1.0.0

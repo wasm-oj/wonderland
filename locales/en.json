@@ -1,5 +1,9 @@
 {
 	"auth": {
+		"copied": "Copied",
+		"copy": "Copy",
+		"device-token": "Device Token",
+		"device-token-description": "Enter this token in trust application to authorize it.",
 		"invalid-token": "Invalid token, please retry again."
 	},
 	"compilers-and-runners": "There are {compilers} compilers and {runners} runners configured with this instance.",
