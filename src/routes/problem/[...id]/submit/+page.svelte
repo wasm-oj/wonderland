@@ -24,6 +24,12 @@
 	const total_score =
 		data.problem.testcase.reduce((acc, cur) => acc + cur.score, 0) *
 		data.problem.policy.reduce((acc, cur) => acc + cur.score, 0);
+
+	const langs = {
+		Rust: "rs",
+		C: "c",
+		"C++": "cpp",
+	};
 </script>
 
 <Head title="Submit to {data.problem.name}" description={data.problem.description} />
@@ -159,7 +165,7 @@
 			>
 				<option disabled selected>{$t("submit.select-language")}</option>
 				{#each Object.entries(schema["shape"]["lang"]["enum"]) as [display, value]}
-					<option {value}>{display}</option>
+					<option value={langs[value]}>{display}</option>
 				{/each}
 			</select>
 
