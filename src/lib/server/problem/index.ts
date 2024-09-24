@@ -184,7 +184,7 @@ export async function list_problems(
 	}
 
 	const cache = CACHE(platform);
-	const key = `https://github.com/${owner}/${repo}/tree/main/index.json`;
+	const key = `https://github.com/${owner}/${repo}/tree/main/spec/index.json`;
 	const cached = await cache.match(key).catch((err) => {
 		console.error("cache match error", err);
 		return undefined;
@@ -195,14 +195,19 @@ export async function list_problems(
 		log("cache hit", key);
 		res = cached;
 	} else if (cfg.problem.password) {
-		res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/index.json`, {
-			headers: {
-				Authorization: `Bearer ${cfg.problem.password}`,
-				Accept: "application/vnd.github.raw",
+		res = await fetch(
+			`https://api.github.com/repos/${owner}/${repo}/contents/spec/index.json`,
+			{
+				headers: {
+					Authorization: `Bearer ${cfg.problem.password}`,
+					Accept: "application/vnd.github.raw",
+				},
 			},
-		});
+		);
 	} else {
-		res = await fetch(`https://raw.githubusercontent.com/${owner}/${repo}/main/index.json`);
+		res = await fetch(
+			`https://raw.githubusercontent.com/${owner}/${repo}/main/spec/index.json`,
+		);
 	}
 
 	if (!res.ok) {
